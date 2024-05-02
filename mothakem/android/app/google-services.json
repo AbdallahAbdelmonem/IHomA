@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606921179359",
+    "project_id": "mothakem-8a457",
+    "storage_bucket": "mothakem-8a457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606921179359:android:f53051ae484b1babc5a96a",
+        "android_client_info": {
+          "package_name": "com.example.mothakem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6e2MO4yMOgjp1pKyMzmtZtDeYymqVyMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
