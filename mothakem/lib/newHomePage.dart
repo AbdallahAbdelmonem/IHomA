@@ -198,6 +198,17 @@ class _HomePageState extends State<HomePage> {
                             child: MaterialApp(
                                 debugShowCheckedModeBanner: false,
                                 home: Scaffold(
+                                  floatingActionButton: FloatingActionButton(
+                                    backgroundColor: Colors.black,
+                                    onPressed: () {},
+                                    child: Container(
+                                      margin: EdgeInsets.all(100),
+                                      child: Text(
+                                        "35c",
+                                        style: TextStyle(fontSize: 50),
+                                      ),
+                                    ),
+                                  ),
                                   appBar: AppBar(
                                     actions: [
                                       Container(
@@ -343,16 +354,16 @@ class _HomePageState extends State<HomePage> {
                         print("!@#garageservoooo ${widget.FB_pin_23}");
                         print("!@#flame ${widget.FB_pin_11}");
                         print("!@#gas ${widget.FB_pin_9}");
-                        if (list[3]["flame_detection"] == "Detection") {
+                        if (list[5]["flame_detection"] == "Detection") {
                           showNotification("Warring!!!!",
                               "The flame sensor detects the presence of a fire");
                         }
-                        if (list[2]["gas_detection"] == "Detection") {
+                        if (list[3]["gas_detection"] == "Detection") {
                           showNotification("Warring!!!!",
                               "The gas sensor detects the presence of a gas");
                         }
-                        frontServo = list[3]["action"];
-                        frontPass = list[3]["resetPassword"];
+                        frontServo = list[4]["action"];
+                        frontPass = list[4]["resetPassword"];
                         backServo = list[1]["action"];
                       }
 

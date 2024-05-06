@@ -127,11 +127,11 @@ class _BedRoomState extends State<BedRoom> {
     ref8.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
-    
+
     ref9.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
-    
+
     ref10.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
@@ -214,6 +214,8 @@ class _BedRoomState extends State<BedRoom> {
   }
 
   Widget build(BuildContext context) {
+    String cvc = '';
+
     return Scaffold(
       body: refS.length == 0
           ? Center(
@@ -294,7 +296,7 @@ class _BedRoomState extends State<BedRoom> {
                                     list3.add(list2[i]);
                                   }
                                 }
-                                    print("BED list3 ${list3}");
+                                print("BED list3 ${list3}");
 
                                 for (int i = 0; i < n2.length; i++) {
                                   print("BED name1 ${n2[i]['name']}");
@@ -306,7 +308,7 @@ class _BedRoomState extends State<BedRoom> {
                                     print("BED list3 ${list3[i]}");
                                   }
                                 }
-
+                                cvc = list2[6]['temp'].toString();
                                 print("BED list ${list}");
                                 //#################################################
 
@@ -353,6 +355,38 @@ class _BedRoomState extends State<BedRoom> {
                                             );
                                             //====================================================
                                           },
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 120),
+                                        // color: Colors.blue,
+                                        width: 80,
+                                        height: 70,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              child: Text(
+                                                "$cvc°",
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.thermostat,
+                                              size: 38,
+                                              color: int.parse(cvc) > 28 &&
+                                                      int.parse(cvc) <= 38
+                                                  ? Colors.amber[900]
+                                                  : int.parse(cvc) > 38
+                                                      ? Colors.red
+                                                      : Colors.blue,
+                                            ),
+                                            // )
+                                          ],
                                         ),
                                       ),
                                     ],

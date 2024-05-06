@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mothakem/addDevice.dart';
@@ -37,7 +38,7 @@ class LivingRoom extends StatefulWidget {
 }
 
 class _LivingRoomState extends State<LivingRoom> {
-   bool switchValue3 = false;
+  bool switchValue3 = false;
   bool switchValue0 = false;
   bool switchValue1 = false;
   bool switchValue2 = false;
@@ -129,11 +130,11 @@ class _LivingRoomState extends State<LivingRoom> {
     ref8.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
-    
+
     ref9.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
-    
+
     ref10.onValue.listen((event) {
       actions.add(event.snapshot.value.toString());
     });
@@ -216,6 +217,7 @@ class _LivingRoomState extends State<LivingRoom> {
   }
 
   Widget build(BuildContext context) {
+    String cvc = '';
     return Scaffold(
       body: refS.length == 0
           ? Center(
@@ -296,7 +298,7 @@ class _LivingRoomState extends State<LivingRoom> {
                                     list3.add(list2[i]);
                                   }
                                 }
-                                    print("BED list3 ${list3}");
+                                print("BED list3 ${list3}");
 
                                 for (int i = 0; i < n2.length; i++) {
                                   print("BED name1 ${n2[i]['name']}");
@@ -308,6 +310,7 @@ class _LivingRoomState extends State<LivingRoom> {
                                     print("BED list3 ${list3[i]}");
                                   }
                                 }
+                                cvc = list2[6]['temp'].toString();
 
                                 print("BED list ${list}");
                                 //#################################################
@@ -355,6 +358,40 @@ class _LivingRoomState extends State<LivingRoom> {
                                             );
                                             //====================================================
                                           },
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 120),
+                                        // color: Colors.blue,
+                                        width: 80,
+                                        height: 70,
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                child: Text(
+                                                  "$cvc°",
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.black),
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.thermostat,
+                                                size: 38,
+                                                color: int.parse(cvc) > 28 &&
+                                                        int.parse(cvc) <= 38
+                                                    ? Colors.amber[900]
+                                                    : int.parse(cvc) > 38
+                                                        ? Colors.red
+                                                        : Colors.blue,
+                                              ),
+                                              // )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -606,7 +643,7 @@ class _LivingRoomState extends State<LivingRoom> {
                                                   ),
                                                 );
                                               }),
-                                        )
+                                        ),
                                 ]);
                               }
                             }
@@ -619,7 +656,6 @@ class _LivingRoomState extends State<LivingRoom> {
     );
   }
 }
-                  
 
 //=================================================================================
 // static const IconData tv = IconData(0xe687, fontFamily: 'MaterialIcons');
