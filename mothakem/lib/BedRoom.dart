@@ -372,7 +372,9 @@ class _BedRoomState extends State<BedRoom> {
                                                 "$cvc°",
                                                 style: TextStyle(
                                                     fontSize: 25,
-                                                    color: Colors.black),
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                             Icon(

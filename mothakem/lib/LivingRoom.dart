@@ -376,7 +376,9 @@ class _LivingRoomState extends State<LivingRoom> {
                                                   "$cvc°",
                                                   style: TextStyle(
                                                       fontSize: 25,
-                                                      color: Colors.black),
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ),
                                               Icon(
