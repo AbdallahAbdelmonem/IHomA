@@ -232,7 +232,8 @@ class _HomePageState extends State<HomePage> {
                                         margin: EdgeInsets.only(right: 70),
                                         child: IconButton(
                                           onPressed: () {},
-                                          icon: Icon(Icons.lock_reset_outlined),
+                                          icon: Icon(
+                                              Icons.power_settings_new_sharp),
                                           iconSize: 45,
                                         ),
                                       ),
