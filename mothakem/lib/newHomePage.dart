@@ -38,7 +38,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List n2 = [];
-  TextEditingController newPassword = TextEditingController();
+  // TextEditingController newPassword = TextEditingController();
   Color col2 = Colors.grey;
   int c2 = 0;
   bool obscureText2 = true;
@@ -79,6 +79,7 @@ class _HomePageState extends State<HomePage> {
   late DatabaseReference ref6;
   late DatabaseReference ref7;
   late DatabaseReference ref8;
+  late DatabaseReference ref9;
 
   initialDatabaseReference() {
     FD = FirebaseDatabase.instance.ref("${widget.passcode}");
@@ -90,6 +91,7 @@ class _HomePageState extends State<HomePage> {
     ref5 = FirebaseDatabase.instance.ref("${widget.passcode}").child("flame");
     ref6 = FirebaseDatabase.instance.ref("${widget.passcode}").child("3");
     ref7 = FirebaseDatabase.instance.ref("${widget.passcode}").child("gas");
+    ref9 = FirebaseDatabase.instance.ref("${widget.passcode}").child("turn");
     getData2();
   }
 
@@ -176,7 +178,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     int x = 0, x2 = 0;
-    String frontServo = "", backServo = '', frontPass = '';
+    String frontServo = "", backServo = '', frontPass = '', turn = '';
     return n.length == 0
         ? Center(child: CircularProgressIndicator())
         : DefaultTabController(
@@ -232,8 +234,7 @@ class _HomePageState extends State<HomePage> {
                                         margin: EdgeInsets.only(right: 70),
                                         child: IconButton(
                                           onPressed: () {},
-                                          icon: Icon(
-                                              Icons.power_settings_new_sharp),
+                                          icon: Icon(Icons.power_settings_new),
                                           iconSize: 45,
                                         ),
                                       ),
@@ -343,13 +344,14 @@ class _HomePageState extends State<HomePage> {
                         List<dynamic> list2 = [];
                         list2.clear();
                         list2 = map.values.toList();
+                        print("new list home2 $list2");
                         for (int i = 0; i < list2.length; i++) {
                           if (list2[i]["action"] != false &&
                               list2[i]["action"] != true) {
                             list.add(list2[i]);
                           }
                         }
-                        print("new list $list");
+                        print("new list home $list");
                         //############## servo
                         print("!@#frontservoooo ${widget.FB_pin_22}");
                         print("!@#garageservoooo ${widget.FB_pin_23}");
@@ -363,9 +365,11 @@ class _HomePageState extends State<HomePage> {
                           showNotification("Warring!!!!",
                               "The gas sensor detects the presence of a gas");
                         }
-                        frontServo = list[4]["action"];
-                        frontPass = list[4]["resetPassword"];
+                        frontServo = list[5]["action"];
+                        frontPass = list[5]["resetPassword"];
                         backServo = list[1]["action"];
+
+                        turn = list[2]["turn"];
                       }
 
                       return Scaffold(
@@ -432,73 +436,22 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               margin: EdgeInsets.only(right: 70),
                               child: IconButton(
-                                onPressed: () {
-                                  // showDataAlert();
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(
-                                                20.0,
-                                              ),
-                                            ),
-                                          ),
-                                          contentPadding: EdgeInsets.only(
-                                            top: 10.0,
-                                          ),
-                                          title: Text(
-                                            "Reset password for door",
-                                            style: TextStyle(fontSize: 22.0),
-                                          ),
-                                          content: Container(
-                                              height: 300,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 20),
-                                                    child: TextField(
-                                                      obscureText: obscureText2,
-                                                      controller: newPassword,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Enter password",
-                                                        border: OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20)),
-                                                      ),
-                                                    ),
-                                                    width: 250,
-                                                  ),
-                                                  ElevatedButton(
-                                                      onPressed: () async {
-                                                        await ref4.set({
-                                                          "action": frontServo,
-                                                          "resetPassword":
-                                                              "${newPassword.text}",
-                                                        });
-                                                        print(
-                                                            "----------------${newPassword.text}");
-                                                        newPassword.text = "";
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        "Reset",
-                                                        style: TextStyle(
-                                                            fontSize: 18),
-                                                      )),
-                                                ],
-                                              )),
-                                        );
-                                      });
+                                onPressed: () async {
+                                  if (turn.contains("off")) {
+                                    await ref9.set({
+                                      "turn": "on",
+                                    });
+                                    // print(
+                                    //     "AAAAAAAAAAAAAAAAAAAAAAAAAAA ${frontServo}");
+                                    x = 1;
+                                  } else {
+                                    await ref9.set({
+                                      "turn": "off",
+                                    });
+                                    x = 0;
+                                  }
                                 },
-                                icon: Icon(Icons.lock_reset_outlined),
+                                icon: Icon(Icons.power_settings_new),
                                 iconSize: 45,
                               ),
                             ),

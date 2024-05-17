@@ -292,6 +292,7 @@ class _LivingRoomState extends State<LivingRoom> {
                                 List<dynamic> list = [];
                                 list2.clear();
                                 list2 = map.values.toList();
+                                print("dfscd ${list2}");
                                 for (int i = 0; i < list2.length; i++) {
                                   if (list2[i]["action"] == false ||
                                       list2[i]["action"] == true) {
@@ -310,7 +311,7 @@ class _LivingRoomState extends State<LivingRoom> {
                                     print("BED list3 ${list3[i]}");
                                   }
                                 }
-                                cvc = list2[6]['temp'].toString();
+                                cvc = list2[7]['temp'].toString();
 
                                 print("BED list ${list}");
                                 //#################################################

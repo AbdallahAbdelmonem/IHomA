@@ -308,7 +308,7 @@ class _BedRoomState extends State<BedRoom> {
                                     print("BED list3 ${list3[i]}");
                                   }
                                 }
-                                cvc = list2[6]['temp'].toString();
+                                cvc = list2[7]['temp'].toString();
                                 print("BED list ${list}");
                                 //#################################################
 
